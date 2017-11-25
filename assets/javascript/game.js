@@ -1,13 +1,12 @@
 $(document).ready(function(){
 
-	// var phaedra = {
-	// 	firstName: "Phaedra",
-	// 	lastName: "Parks",
-	// 	startlifePoints: 100,
-	// 	powerPoints: 1
-	// }
+	var phaedra = {
+		firstName: "Phaedra",
+		lastName: "Parks",
+		startlifePoints: 100,
+		powerPoints: 1
+	}
 
-	var phaedra = [100];
 	var kenya = {
 		firstName: "Kenya",
 		lastName: "Moore",
@@ -50,6 +49,7 @@ $(document).ready(function(){
 			$("#" + characterId).remove();
 			$(".defender-area").append('<div class="character defender"></div>');
 			$(".defender").attr("id", characterId);
+			$(".character").attr("height", "600px");
 
 			//add score info within character
 			$("#" + characterId).append("<h3 class='name'>defender-name</h3>");
@@ -114,42 +114,56 @@ $(document).ready(function(){
 			defendLife = defendLife;
 		}
 
-		console.log("Defend Life:" + defendLife);
+		//console.log("Defend Life:" + defendLife);
 		$(".defender > .life").text("Life Points: " + defendLife);
-		console.log("Attack Life:" + attackLife);
+		//console.log("Attack Life:" + attackLife);
 		$(".enemy > .life").text("Life Points: " + attackLife);
 
-		console.log("Defend Power:" + defendPower);
+		//console.log("Defend Power:" + defendPower);
 		$(".defender > .power").text("Attack Points: " + defendPower);
-		console.log("Attack Power:" + attackPower);
+		//console.log("Attack Power:" + attackPower);
 		$(".enemy > .power").text("Attack Points: " + attackPower);
 
 		//update attack and defend variables in the DOM
 
 		 if (attackLife <= 0) {
-		// 	//if enemy's life points < 0 you win
-		// 	//select another enemy
-		$(".attack-button").append("You win! Select another enemy to continue.");
+		//if enemy's life points < 0 you win, select another enemy
+		$(".attack-button-win-msg").removeClass("hide");
 		
 		//hide attack button, hide current defender
 		$("#attack").addClass("hide");
 		$(".enemy").addClass("hide");
+		$(".attack-button-msg").addClass("hide");
 		$(".enemy").removeClass("enemy")
+
+
+			$("#phaedra, #porsha, #nene, #kenya").on("click", function(){
+				$(".attack-button-win-msg").addClass("hide");
+				$("#attack").removeClass("hide");
+			})
+
+		//reset life points
+		attackLife = 100;
+
 
 		 } else if (defendLife <= 0) {
 			// //step 5 you lose
 			// 	//if your life points = 0 you lose
-			$(".attack-button").append("<div>You lose. Click refresh to play again.</div>");
-
+			$(".attack-button-lose-msg").removeClass("hide");
 			//hide attack button, unhide refresh button
 			$("#attack").addClass("hide");
 			$("#refresh").removeClass("hide");
 		 }
-
 		
 	});
 
-
-
 		//step 6 refresh game
+		$("#refresh").on("click", function(){
+			$("#attack").addClass("hide");
+			$(".attack-button-lose-msg").addClass("hide");
+			$(".attack-button-win-msg").addClass("hide");
+			$("#refresh").addClass("hide");
+			$(".defender-area").empty();
+			$(".current-enemy-area").empty();
+		})
 });
