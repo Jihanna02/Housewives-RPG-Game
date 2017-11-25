@@ -1,30 +1,31 @@
 $(document).ready(function(){
 
-	var phaedra = {
-		firstName: "Phaedra",
-		lastName: "Parks",
-		lifePoints: 100,
-		powerPoints: 1
-	}
+	// var phaedra = {
+	// 	firstName: "Phaedra",
+	// 	lastName: "Parks",
+	// 	startlifePoints: 100,
+	// 	powerPoints: 1
+	// }
 
+	var phaedra = [100];
 	var kenya = {
 		firstName: "Kenya",
 		lastName: "Moore",
-		lifePoints: 180,
+		startlifePoints: 180,
 		powerPoints: 1
 	}
 
 	var porsha = {
 		firstName: "Porsha",
 		lastName: "Williams",
-		lifePoints: 150,
+		startlifePoints: 150,
 		powerPoints: 1
 	}
 
 	var nene = {
 		firstName: "NeNe",
 		lastName: "Leakes",
-		lifePoints: 100,
+		startlifePoints: 100,
 		powerPoints: 1
 	}
 
@@ -36,8 +37,11 @@ $(document).ready(function(){
 	$(" #phaedra, #porsha, #nene, #kenya").on("click",function(){
 			
 		var characterId = $(this).attr("id");
-		var fullName = characterId+"."+firstName+" "+characterId+"."+lifePoints;
-		var lifePoints = characterId+"."+lifePoints;
+		var points = characterId+"[0]";
+
+		console.log(points);
+		// var fullName = characterId[firstName];
+		// var lifePoints = characterId[startLifePoints];
 
 		//if no defender character has been selected, select one
 		if (defendTest === false) {
@@ -48,9 +52,9 @@ $(document).ready(function(){
 			$(".defender").attr("id", characterId);
 
 			//add score info within character
-			$("#" + characterId).append("<div class='name'>" + fullName + "</div>");
-			$("#" + characterId).append("<div class='attack-score'>" + "attack score here" + "</div>");
-			$("#" + characterId).append("<div class='life-score'>" + lifePoints	 + "</div>");
+			$("#" + characterId).append("<h3 class='name'>defender-name</h3>");
+			$("#" + characterId).append("<h4 class='power'>defender-power</h4>");
+			$("#" + characterId).append("<h4 class='life'>defender-life</h4>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
@@ -69,9 +73,9 @@ $(document).ready(function(){
 			$(".enemy").attr("id", characterId);
 
 			//add score info within character
-			$("#" + characterId).append("<div class='name'>" + "character name" + "</div>");
-			$("#" + characterId).append("<div class='attack-score'>" + "attack score here" + "</div>");
-			$("#" + characterId).append("<div class='life-score'>" + "life score here"	 + "</div>");
+			$("#" + characterId).append("<h3 class='name'>enemy-name</h3>");
+			$("#" + characterId).append("<h4 class='power'>enemy-power</h4>");
+			$("#" + characterId).append("<h4 class='life'>enemy-life</h4>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
@@ -111,10 +115,14 @@ $(document).ready(function(){
 		}
 
 		console.log("Defend Life:" + defendLife);
+		$(".defender > .life").text("Life Points: " + defendLife);
 		console.log("Attack Life:" + attackLife);
+		$(".enemy > .life").text("Life Points: " + attackLife);
 
 		console.log("Defend Power:" + defendPower);
+		$(".defender > .power").text("Attack Points: " + defendPower);
 		console.log("Attack Power:" + attackPower);
+		$(".enemy > .power").text("Attack Points: " + attackPower);
 
 		//update attack and defend variables in the DOM
 
