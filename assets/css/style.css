@@ -8,7 +8,7 @@ body {
 .enemy-area{
 	width: 50%;
 	margin: 0;
-	height: 100vh;
+	height: 85vh;
 	border: 1px solid white;
 	float: left;
 	box-sizing: border-box;
@@ -19,7 +19,7 @@ body {
 	width: 50%;
 	margin: 0;
 	border: 1px solid white;
-	height: 100vh;
+	height: 85vh;
 	float: left;
 	box-sizing: border-box;
 	position: relative;
@@ -38,6 +38,7 @@ body {
 	box-sizing: border-box;
 	border: 1px solid white;
 	float: left;
+	height: 400px;
 }
 
 .current-enemy-area {

@@ -4,28 +4,32 @@ $(document).ready(function(){
 		firstName: "Phaedra",
 		lastName: "Parks",
 		image: "assets/images/PP_01.png",
-		lifePoints: 100
+		lifePoints: 100,
+		powerPoints: 1
 	}
 
 	var kenya = {
 		firstName: "Kenya",
 		lastName: "Moore",
 		image: "assets/images/KM_01.png",
-		lifePoints: 180
+		lifePoints: 180,
+		powerPoints: 1
 	}
 
 	var porsha = {
 		firstName: "Porsha",
 		lastName: "Williams",
 		image: "assets/images/PW_01.png",
-		lifePoints: 150
+		lifePoints: 150,
+		powerPoints: 1
 	}
 
 	var nene = {
 		firstName: "NeNe",
 		lastName: "Leakes",
 		image: "assets/images/NL_01.png",
-		lifePoints: 100
+		lifePoints: 100,
+		powerPoints: 1
 	}
 
 	// defender test, check to see if defender character has been selected before enabling click event
@@ -85,20 +89,37 @@ $(document).ready(function(){
 
 	}); 
 
-
+	//step 2 click attack
 	$("#attack").on("click", function(){
-			//step 2 click attack
-			//generate random attack value for defender
-			//generate random attack value for defender for enemy
-			//add or subtract from points
+		//generate random attack value for defender
+		var defendLife =  100;
+		var defendPower = Math.floor(Math.random() * 100);
 
-		//step 4 you win
-			//if enemny's life points = 0 you win
+		//generate random attack value for defender for enemy
+		var attackLife = 100;
+		var attackPower = Math.floor(Math.random() * 100);
+
+		if () {
+			//if defendPower > attackPower, subtract defendPower from attackLife
+
+
+		} else () {
+			//if attackPower > defendPower, subtract attackPower from defendLife
+
+		}
+
+		//update attack and defend variables in the DOM
+
+		if () {
+			//if enemy's life points < 0 you win
 			//select another enemy
 
-
+		} else if () {
 		//step 5 you lose
 			//if your life points = 0 you lose
+
+
+		}
 
 		//unhide refresh button
 	});
