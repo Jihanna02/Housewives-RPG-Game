@@ -26,9 +26,7 @@ body {
 }
 
 .character {
-	float: left;
-	width: 130px;
-	height: 400px;
+
 }
 
 /*.character::after {
@@ -61,23 +59,35 @@ h1, h2 {
 	background: url("../images/PP_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-color: red;	
+	background-color: red;
+	float: left;
+	width: 130px;
+	height: 400px;	
 }
 .porsha {
 	background: url("../images/PW_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-color: red;	
+	background-color: red;
+	float: left;
+	width: 130px;
+	height: 400px;	
 }
 .nene {
 	background: url("../images/NL_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-color: red;	
+	background-color: red;
+	float: left;
+	width: 130px;
+	height: 400px;	
 }
 .kenya {
 	background: url("../images/KM_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-color: red;	
+	background-color: red;
+	float: left;
+	width: 130px;
+	height: 400px;	
 }

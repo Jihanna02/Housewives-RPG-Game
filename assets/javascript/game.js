@@ -32,10 +32,11 @@ var nene = {
 		var characterId = $(this).attr("class");
 		var characterImage = characterId+".image";
 
-		$(".defender-area").append('<div class="' + characterId + '"></div>');
-		$("." + characterId).remove();
+		console.log(characterId);
 
-	})
+		$("." + characterId).remove();
+		$(".defender-area").append('<div class="'+characterId+'"></div>');
+	});
 
 		//activate "next" button
 
