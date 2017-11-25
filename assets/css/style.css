@@ -30,6 +30,7 @@ body {
 	box-sizing: border-box;
 	border: 1px solid white;
 	float: left;
+	position: relative;
 }
 
 .attack-button {
@@ -44,6 +45,7 @@ body {
 	box-sizing: border-box;
 	border: 1px solid white;
 	float: left;
+	position: relative;
 }
 
 
@@ -63,6 +65,20 @@ h1, h2 {
 	text-align: right;
 }
 
+.life-score {
+	position: absolute;
+    bottom: 17px;
+    text-align: center;
+    width: 100%;
+}
+
+.attack-score {
+	position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
 .hide {
 	display: none;
 }
@@ -72,25 +88,25 @@ h1, h2 {
 	float: left;
 }
 
-.phaedra {
+#phaedra {
 	background: url("../images/PP_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;	
 	width: 130px;		
 }
-.porsha {
+#porsha {
 	background: url("../images/PW_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 130px;	
 }
-.nene {
+#nene {
 	background: url("../images/NL_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 130px;	
 }
-.kenya {
+#kenya {
 	background: url("../images/KM_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
