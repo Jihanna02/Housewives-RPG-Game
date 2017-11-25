@@ -1,0 +1,83 @@
+body {
+	background: url("../images/bg_01.jpg");
+	background-size: cover;
+	background color: #000000;
+	color: #ffffff;
+	}
+
+.enemy-area{
+	width: 50%;
+	margin: 0;
+	height: 100vh;
+	border: 1px solid white;
+	float: left;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.defender-area {
+	width: 50%;
+	margin: 0;
+	border: 1px solid white;
+	height: 100vh;
+	float: left;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.character {
+	float: left;
+	width: 130px;
+	height: 400px;
+}
+
+/*.character::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+*/
+img {
+	height: 400px;
+	/*float: left;*/
+	position: absolute;
+	bottom: 0;
+}
+
+.name {
+	text-transform: uppercase;
+	text-align: center;
+}
+
+h1, h2 {
+	text-align: right;
+}
+
+.hide {
+	display: none;
+}
+
+.phaedra {
+	background: url("../images/PP_01.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: red;	
+}
+.porsha {
+	background: url("../images/PW_01.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: red;	
+}
+.nene {
+	background: url("../images/NL_01.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: red;	
+}
+.kenya {
+	background: url("../images/KM_01.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: red;	
+}
