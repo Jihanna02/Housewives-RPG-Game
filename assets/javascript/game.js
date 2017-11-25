@@ -3,7 +3,6 @@ $(document).ready(function(){
 	var phaedra = {
 		firstName: "Phaedra",
 		lastName: "Parks",
-		image: "assets/images/PP_01.png",
 		lifePoints: 100,
 		powerPoints: 1
 	}
@@ -11,7 +10,6 @@ $(document).ready(function(){
 	var kenya = {
 		firstName: "Kenya",
 		lastName: "Moore",
-		image: "assets/images/KM_01.png",
 		lifePoints: 180,
 		powerPoints: 1
 	}
@@ -19,7 +17,6 @@ $(document).ready(function(){
 	var porsha = {
 		firstName: "Porsha",
 		lastName: "Williams",
-		image: "assets/images/PW_01.png",
 		lifePoints: 150,
 		powerPoints: 1
 	}
@@ -27,19 +24,20 @@ $(document).ready(function(){
 	var nene = {
 		firstName: "NeNe",
 		lastName: "Leakes",
-		image: "assets/images/NL_01.png",
 		lifePoints: 100,
 		powerPoints: 1
 	}
 
 	// defender test, check to see if defender character has been selected before enabling click event
 	 var defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
-	 	console.log(defendTest);
+	 	//console.log(defendTest);
 
 	//step one - click events
 	$(" #phaedra, #porsha, #nene, #kenya").on("click",function(){
 			
 		var characterId = $(this).attr("id");
+		var fullName = characterId+"."+firstName+" "+characterId+"."+lifePoints;
+		var lifePoints = characterId+"."+lifePoints;
 
 		//if no defender character has been selected, select one
 		if (defendTest === false) {
@@ -50,14 +48,14 @@ $(document).ready(function(){
 			$(".defender").attr("id", characterId);
 
 			//add score info within character
-			$("#" + characterId).append("<div class='name'>" + "character name" + "</div>");
+			$("#" + characterId).append("<div class='name'>" + fullName + "</div>");
 			$("#" + characterId).append("<div class='attack-score'>" + "attack score here" + "</div>");
-			$("#" + characterId).append("<div class='life-score'>" + "life score here"	 + "</div>");
+			$("#" + characterId).append("<div class='life-score'>" + lifePoints	 + "</div>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
 
-			console.log(defendTest);
+			//console.log(defendTest);
 
 			//prompts user to select next character
 			$("h2").text("select your enemy");
@@ -78,7 +76,7 @@ $(document).ready(function(){
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
 
-			console.log(defendTest);
+			//console.log(defendTest);
 
 			//unhide attack button
 			$("#attack").removeClass("hide");
@@ -89,39 +87,58 @@ $(document).ready(function(){
 
 	}); 
 
+	var defendLife =  100;
+	var attackLife = 100;
+
 	//step 2 click attack
 	$("#attack").on("click", function(){
 		//generate random attack value for defender
-		var defendLife =  100;
-		var defendPower = Math.floor(Math.random() * 100);
+		var defendPower = Math.floor(Math.random() * 50);
 
 		//generate random attack value for defender for enemy
-		var attackLife = 100;
-		var attackPower = Math.floor(Math.random() * 100);
+		var attackPower = Math.floor(Math.random() * 50);
 
-		if () {
+		if (defendPower > attackPower) {
 			//if defendPower > attackPower, subtract defendPower from attackLife
+			attackLife = attackLife - defendPower;
 
-
-		} else () {
+		} else if (attackPower > defendPower) {
 			//if attackPower > defendPower, subtract attackPower from defendLife
-
+			defendLife = defendLife - attackPower;
+		} else {
+			attackLife = attackLife;
+			defendLife = defendLife;
 		}
+
+		console.log("Defend Life:" + defendLife);
+		console.log("Attack Life:" + attackLife);
+
+		console.log("Defend Power:" + defendPower);
+		console.log("Attack Power:" + attackPower);
 
 		//update attack and defend variables in the DOM
 
-		if () {
-			//if enemy's life points < 0 you win
-			//select another enemy
+		 if (attackLife <= 0) {
+		// 	//if enemy's life points < 0 you win
+		// 	//select another enemy
+		$(".attack-button").append("You win! Select another enemy to continue.");
+		
+		//hide attack button, hide current defender
+		$("#attack").addClass("hide");
+		$(".enemy").addClass("hide");
+		$(".enemy").removeClass("enemy")
 
-		} else if () {
-		//step 5 you lose
-			//if your life points = 0 you lose
+		 } else if (defendLife <= 0) {
+			// //step 5 you lose
+			// 	//if your life points = 0 you lose
+			$(".attack-button").append("<div>You lose. Click refresh to play again.</div>");
 
+			//hide attack button, unhide refresh button
+			$("#attack").addClass("hide");
+			$("#refresh").removeClass("hide");
+		 }
 
-		}
-
-		//unhide refresh button
+		
 	});
 
 
