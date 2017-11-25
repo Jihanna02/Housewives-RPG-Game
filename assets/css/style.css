@@ -15,7 +15,7 @@ body {
 	position: relative;
 }
 
-.defender-area {
+.battle-area {
 	width: 50%;
 	margin: 0;
 	border: 1px solid white;
@@ -25,16 +25,28 @@ body {
 	position: relative;
 }
 
-.character {
-
+.defender-area {
+	width: 33%;
+	box-sizing: border-box;
+	border: 1px solid white;
+	float: left;
 }
 
-/*.character::after {
-    content: "";
-    clear: both;
-    display: table;
+.attack-button {
+	width: 33%;
+	box-sizing: border-box;
+	border: 1px solid white;
+	float: left;
 }
-*/
+
+.current-enemy-area {
+	width: 33%;
+	box-sizing: border-box;
+	border: 1px solid white;
+	float: left;
+}
+
+
 img {
 	height: 400px;
 	/*float: left;*/
@@ -55,39 +67,32 @@ h1, h2 {
 	display: none;
 }
 
+.character{
+	height: 400px;
+	float: left;
+}
+
 .phaedra {
 	background: url("../images/PP_01.png");
 	background-size: contain;
-	background-repeat: no-repeat;
-	background-color: red;
-	float: left;
-	width: 130px;
-	height: 400px;	
+	background-repeat: no-repeat;	
+	width: 130px;		
 }
 .porsha {
 	background: url("../images/PW_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-color: red;
-	float: left;
-	width: 130px;
-	height: 400px;	
+	width: 130px;	
 }
 .nene {
 	background: url("../images/NL_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-color: red;
-	float: left;
-	width: 130px;
-	height: 400px;	
+	width: 130px;	
 }
 .kenya {
 	background: url("../images/KM_01.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-color: red;
-	float: left;
-	width: 130px;
-	height: 400px;	
+	width: 150px;
 }
