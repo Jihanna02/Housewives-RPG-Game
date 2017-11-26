@@ -5,28 +5,33 @@ $(document).ready(function(){
 		lastName: "Parks",
 		startlifePoints: 100,
 		powerPoints: 1
-	}
+	};
 
 	var kenya = {
 		firstName: "Kenya",
 		lastName: "Moore",
 		startlifePoints: 180,
 		powerPoints: 1
-	}
+	};
 
 	var porsha = {
 		firstName: "Porsha",
 		lastName: "Williams",
 		startlifePoints: 150,
 		powerPoints: 1
-	}
+	};
 
 	var nene = {
 		firstName: "NeNe",
 		lastName: "Leakes",
 		startlifePoints: 100,
 		powerPoints: 1
-	}
+	};
+
+	var defendPower = 0;
+	var attackPower = 0;
+	var defendLife = 100;
+	var attackLife = 100;
 
 	// defender test, check to see if defender character has been selected before enabling click event
 	 var defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
@@ -50,19 +55,22 @@ $(document).ready(function(){
 			$(".defender-area").append('<div class="character defender"></div>');
 			$(".defender").attr("id", characterId);
 			$(".character").attr("height", "600px");
+			$(".character-heading").removeClass("hide");
+			$(".current-enemy-heading").removeClass("hide");
 
 			//add score info within character
 			$("#" + characterId).append("<h3 class='name'>defender-name</h3>");
-			$("#" + characterId).append("<h4 class='power'>defender-power</h4>");
+
 			$("#" + characterId).append("<h4 class='life'>defender-life</h4>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
 
-			//console.log(defendTest);
+			//auto-generates random amount of power of your character
+			defendPower = Math.floor(Math.random() * 50);
 
 			//prompts user to select next character
-			$("h2").text("select your enemy");
+			$(".select").text("select your enemy");
 
 		} else if (defendTest === true) {
 
@@ -74,55 +82,57 @@ $(document).ready(function(){
 
 			//add score info within character
 			$("#" + characterId).append("<h3 class='name'>enemy-name</h3>");
-			$("#" + characterId).append("<h4 class='power'>enemy-power</h4>");
 			$("#" + characterId).append("<h4 class='life'>enemy-life</h4>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
 
-			//console.log(defendTest);
+			//auto-generates random amount of power of enemy
+			attackPower = Math.floor(Math.random() * 50);
 
 			//unhide attack button
 			$("#attack").removeClass("hide");
 
 			//prompts user to click the attack button
-			$("h2").text("attack!");
+			$(".select").text("attack!");
 		}//closes if / else if statement
 
 	}); 
 
-	var defendLife =  100;
-	var attackLife = 100;
 
 	//step 2 click attack
 	$("#attack").on("click", function(){
 		//generate random attack value for defender
-		var defendPower = Math.floor(Math.random() * 50);
+
 
 		//generate random attack value for defender for enemy
-		var attackPower = Math.floor(Math.random() * 50);
 
-		if (defendPower > attackPower) {
-			//if defendPower > attackPower, subtract defendPower from attackLife
+		if( defendPower > attackPower ) {
+
+			defendPower = defendPower + Math.floor((attackPower/10));
+
+			defendLife = defendLife - attackPower;
+
+			console.log("defend power: " +defendPower);
+			console.log("defend life: "+ defendLife);
+
+		} else {
+
 			attackLife = attackLife - defendPower;
 
-		} else if (attackPower > defendPower) {
-			//if attackPower > defendPower, subtract attackPower from defendLife
-			defendLife = defendLife - attackPower;
-		} else {
-			attackLife = attackLife;
-			defendLife = defendLife;
+			console.log("attack: " +attackLife);
 		}
-
+		
+		
 		//console.log("Defend Life:" + defendLife);
 		$(".defender > .life").text("Life Points: " + defendLife);
 		//console.log("Attack Life:" + attackLife);
 		$(".enemy > .life").text("Life Points: " + attackLife);
 
 		//console.log("Defend Power:" + defendPower);
-		$(".defender > .power").text("Attack Points: " + defendPower);
-		//console.log("Attack Power:" + attackPower);
-		$(".enemy > .power").text("Attack Points: " + attackPower);
+		$(".attack-stats").removeClass("hide");
+		$(".attack-power").text( attackPower);
+		$(".defend-power").text(defendPower);
 
 		//update attack and defend variables in the DOM
 
@@ -134,13 +144,13 @@ $(document).ready(function(){
 		$("#attack").addClass("hide");
 		$(".enemy").addClass("hide");
 		$(".attack-button-msg").addClass("hide");
-		$(".enemy").removeClass("enemy")
+		$(".enemy").removeClass("enemy");
 
 
 			$("#phaedra, #porsha, #nene, #kenya").on("click", function(){
 				$(".attack-button-win-msg").addClass("hide");
 				$("#attack").removeClass("hide");
-			})
+			});
 
 		//reset life points
 		attackLife = 100;
@@ -165,5 +175,7 @@ $(document).ready(function(){
 			$("#refresh").addClass("hide");
 			$(".defender-area").empty();
 			$(".current-enemy-area").empty();
-		})
+			$(".character").removeClass("defender");
+			$(".character").removeClass("enemy");
+		});
 });

@@ -58,7 +58,7 @@ img {
 	text-align: center;
 }
 
-h1, h2 {
+h1, .select {
 	text-align: right;
 }
 
@@ -83,6 +83,7 @@ h1, h2 {
 .character{
 	height: 400px;
 	float: left;
+	padding-top: 125px;
 }
 
 #phaedra {
