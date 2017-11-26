@@ -1,11 +1,13 @@
 body {
 	background: url("../images/bg_01.jpg");
 	background-size: cover;
-	background color: #000000;
+	background-color: #000000;
 	color: #ffffff;
 	height: 100vh;
 	font-family: 'Pridi', serif;
+	overflow: hidden;
 	}
+
 
 header {
 	padding: 50px 50px 50px 0px;
@@ -25,12 +27,17 @@ header {
 }
 
 .battle-area {
-	width: 50%;
 	margin: 0;
-	height: 85vh;
 	float: left;
 	box-sizing: border-box;
 	position: relative;
+	width: 400px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 200px;
+    position: absolute;
+    right: 60px;
+    box-shadow: 3px 7px 11px rgba(27, 27, 27, 0.59);
 }
 
 .defender-area {
@@ -106,6 +113,11 @@ h1 {
 	float: left;
 	padding-top: 125px;
 	box-sizing: border-box;
+	height: 385px;
+}
+
+.character:hover {
+	color: #c8ffff;
 }
 
 #phaedra {

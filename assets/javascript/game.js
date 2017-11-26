@@ -61,7 +61,7 @@ $(document).ready(function(){
 			//add score info within character
 			$("#" + characterId).append("<h3 class='name'>defender-name</h3>");
 
-			$("#" + characterId).append("<h4 class='life'>defender-life</h4>");
+			$("#" + characterId).append("<h4 class='life points'>defender-life</h4>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
@@ -70,7 +70,7 @@ $(document).ready(function(){
 			defendPower = Math.floor(Math.random() * 50);
 
 			//prompts user to select next character
-			$(".select").text("select your enemy");
+			$(".select").text("Select your enemy...");
 
 		} else if (defendTest === true) {
 
@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 			//add score info within character
 			$("#" + characterId).append("<h3 class='name'>enemy-name</h3>");
-			$("#" + characterId).append("<h4 class='life'>enemy-life</h4>");
+			$("#" + characterId).append("<h4 class='life points'>enemy-life</h4>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
@@ -94,7 +94,7 @@ $(document).ready(function(){
 			$("#attack").removeClass("hide");
 
 			//prompts user to click the attack button
-			$(".select").text("attack!");
+			$(".select").text("Click button to attack!");
 		}//closes if / else if statement
 
 	}); 
@@ -125,9 +125,9 @@ $(document).ready(function(){
 		
 		
 		//console.log("Defend Life:" + defendLife);
-		$(".defender > .life").text("Life Points: " + defendLife);
+		$(".defender > .life").text("HP: " + defendLife);
 		//console.log("Attack Life:" + attackLife);
-		$(".enemy > .life").text("Life Points: " + attackLife);
+		$(".enemy > .life").text("HP: " + attackLife);
 
 		//console.log("Defend Power:" + defendPower);
 		$(".attack-stats").removeClass("hide");
