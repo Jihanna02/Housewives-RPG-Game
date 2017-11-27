@@ -68,20 +68,20 @@ $(document).ready(function(){
 			//remove character from the enemy-area div, append to the defender-area div, re-add the id, add class of "defender"
 			$("#" + characterId).remove();
 			$(".defender-area").append('<div class="character defender"></div>')
-			$(".character").attr("id", characterId);
+			$(".defender").attr("id", characterId);
 			;
 			$(".defender").addClass(firstName);
-			
+
+			//add character headings
 			$(".character-heading").removeClass("hide");
 			$(".current-enemy-heading").removeClass("hide");
 
 			//add score info within character
-			$("#" + characterId).append("<h3 class='name'>defender-name</h3>");
-
-			$("#" + characterId).append("<h4 class='life points'>defender-life</h4>");
+			$(".defender").append("<h3 class='name'>"+ fullName +"</h3>");
+			$(".defender").append("<h4 class='life points'>"+points+"</h4>");
 
 			//update defendTest
-			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
+			defendTest = $(".phaedra, .porsha, .nene, .kenya").hasClass("defender");
 
 			//auto-generates random amount of power of your character
 			defendPower = Math.floor(Math.random() * 50);
@@ -96,10 +96,11 @@ $(document).ready(function(){
 			$("#" + characterId).remove();
 			$(".current-enemy-area").append('<div class="character enemy"></div>');
 			$(".enemy").attr("id", characterId);
+			$(".enemy").addClass(firstName);
 
 			//add score info within character
-			$("#" + characterId).append("<h3 class='name'>enemy-name</h3>");
-			$("#" + characterId).append("<h4 class='life points'>enemy-life</h4>");
+			$(".enemy").append("<h3 class='name'>"+ fullName +"</h3>");
+			$(".enemy").append("<h4 class='life points'>"+points+"</h4>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
