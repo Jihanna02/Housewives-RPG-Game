@@ -17,7 +17,7 @@ $(document).ready(function(){
 		nene = {
 			firstName: "NeNe",
 			lastName: "Leakes",
-			startlifePoints: "100",
+			startlifePoints: "130",
 			powerPoints: 1,
 		},
 
@@ -29,9 +29,6 @@ $(document).ready(function(){
 		}
 	];
 
-
-	console.log(realHousewives);
-	
 
 	var defendPower = 0;
 	var attackPower = 0;
@@ -127,19 +124,18 @@ $(document).ready(function(){
 
 		if( defendPower > attackPower ) {
 
-			defendPower = defendPower + Math.floor((attackPower/10));
+			defendPower = defendPower + Math.floor(attackPower * .1);
+
+		};	
+
+			// console.log("defend power: " +defendPower);
 
 			defendLife = defendLife - attackPower;
-
-			console.log("defend power: " +defendPower);
-			console.log("defend life: "+ defendLife);
-
-		} else {
-
 			attackLife = attackLife - defendPower;
 
-			console.log("attack: " +attackLife);
-		}
+			console.log("defend life: "+ defendLife)
+			console.log("attack: " + attackLife);
+		
 		
 		
 		//console.log("Defend Life:" + defendLife);
@@ -149,7 +145,7 @@ $(document).ready(function(){
 
 		//console.log("Defend Power:" + defendPower);
 		$(".attack-stats").removeClass("hide");
-		$(".attack-power").text( attackPower);
+		$(".attack-power").text(attackPower);
 		$(".defend-power").text(defendPower);
 
 		//update attack and defend variables in the DOM
