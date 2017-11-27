@@ -1,32 +1,37 @@
 $(document).ready(function(){
 
-	var phaedra = {
-		firstName: "Phaedra",
-		lastName: "Parks",
-		startlifePoints: 100,
-		powerPoints: 1
-	};
+	var realHousewives = [
+		phaedra = {
+			firstName: "Phaedra",
+			lastName: "Parks",
+			startlifePoints: 100, 
+			powerPoints: 1
+		},
+		porsha = {
+			firstName: "Porsha", 
+			lastName: "Williams", 
+			startlifePoints: 150,
+			powerPoints: 1
+		},
 
-	var kenya = {
-		firstName: "Kenya",
-		lastName: "Moore",
-		startlifePoints: 180,
-		powerPoints: 1
-	};
+		nene = {
+			firstName: "NeNe",
+			lastName: "Leakes",
+			startlifePoints: "100",
+			powerPoints: 1,
+		},
 
-	var porsha = {
-		firstName: "Porsha",
-		lastName: "Williams",
-		startlifePoints: 150,
-		powerPoints: 1
-	};
+		kenya = {
+			firstName: "Kenya",
+			lastName: "Moore",
+			startlifePoints: 180,
+			powerPoints: 1
+		}
+	];
 
-	var nene = {
-		firstName: "NeNe",
-		lastName: "Leakes",
-		startlifePoints: 100,
-		powerPoints: 1
-	};
+
+	console.log(realHousewives);
+	
 
 	var defendPower = 0;
 	var attackPower = 0;
@@ -34,27 +39,39 @@ $(document).ready(function(){
 	var attackLife = 100;
 
 	// defender test, check to see if defender character has been selected before enabling click event
-	 var defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
+	 var defendTest = $(".phaedra, .porsha, .nene, .kenya").hasClass("defender");
 	 	//console.log(defendTest);
 
+	//parses realHousewives object, builds characters in enemy-area div
+	 for (var i=0; i < realHousewives.length; i++) {
+	 	var firstName = realHousewives[i].firstName.toLowerCase();
+	 	var characterDiv = "<div id='"+i+"' class='character"+ " " +firstName+"'><h3 class='name'>"+realHousewives[i].firstName+ "<br />"+realHousewives[i].lastName+"</h3><h4 class='life points'>HP: "+realHousewives[i].startlifePoints+"</h4></div>";
+	 	$(".enemy-area").append(characterDiv);
+	 }
+
 	//step one - click events
-	$(" #phaedra, #porsha, #nene, #kenya").on("click",function(){
+	$(" .phaedra, .porsha, .nene, .kenya").on("click",function(){
 			
 		var characterId = $(this).attr("id");
-		var points = characterId+"[0]";
+		var points = realHousewives[characterId].startlifePoints;
+		var fullName = realHousewives[characterId].firstName + "<br />" + realHousewives[characterId].lastName;
 
 		console.log(points);
-		// var fullName = characterId[firstName];
-		// var lifePoints = characterId[startLifePoints];
+		console.log(fullName);
+
+		var firstName = realHousewives[characterId].firstName.toLowerCase();
+		var characterDiv = "<div id='"+characterId+"' class='character"+ " " +firstName+"'><h3 class='name'>"+fullName+"</h3><h4 class='life points'>HP: "+points+"</h4></div>";
 
 		//if no defender character has been selected, select one
 		if (defendTest === false) {
 
 			//remove character from the enemy-area div, append to the defender-area div, re-add the id, add class of "defender"
 			$("#" + characterId).remove();
-			$(".defender-area").append('<div class="character defender"></div>');
-			$(".defender").attr("id", characterId);
-			$(".character").attr("height", "600px");
+			$(".defender-area").append('<div class="character defender"></div>')
+			$(".character").attr("id", characterId);
+			;
+			$(".defender").addClass(firstName);
+			
 			$(".character-heading").removeClass("hide");
 			$(".current-enemy-heading").removeClass("hide");
 
