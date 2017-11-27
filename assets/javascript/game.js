@@ -1,5 +1,19 @@
 $(document).ready(function(){
 
+	var realHousewives = [
+		phaedra = {
+			firstName: "Phaedra",
+			lastName: "Parks",
+			startlifePoints: 100, 
+			powerPoints: 1
+		},
+		kenya = {
+			firstName: "Kenya", 
+			lastName: "Moore", 
+			startlifePoints: 180,
+			powerPoints: 1
+		}
+	]
 	var phaedra = {
 		firstName: "Phaedra",
 		lastName: "Parks",
@@ -33,6 +47,21 @@ $(document).ready(function(){
 	var defendLife = 100;
 	var attackLife = 100;
 
+
+	for (var i = 0; i < realHousewives.length; i++) {
+		firstName = realHousewives[i].firstName.toLowerCase();
+		divToCreate = `<div id=${i} class="character"><h3 id=${i} class=name">${realHousewives[i].firstName} ${realHousewives[i].lastName}</h3><h4 id=${i} class="life points">HP: ${realHousewives[i].startlifePoints}</h4></div>`
+		$("#test").append(divToCreate);
+	}
+	$("#test").on("click", function(e) {
+		console.log(e)
+		id=e.target.id
+		console.log(realHousewives[id])
+		realHousewives[id].firstName
+		realHousewives[id].lastName
+		realHousewives[id].startlifePoints
+	})
+
 	// defender test, check to see if defender character has been selected before enabling click event
 	 var defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
 	 	//console.log(defendTest);
@@ -45,7 +74,10 @@ $(document).ready(function(){
 
 		console.log(points);
 		// var fullName = characterId[firstName];
-		// var lifePoints = characterId[startLifePoints];
+		// var lifePoints = characterId[startLifePoints]
+
+
+
 
 		//if no defender character has been selected, select one
 		if (defendTest === false) {
