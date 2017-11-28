@@ -52,8 +52,10 @@ $(document).ready(function(){
 	$(".character").on("click",function(){
 		console.log("im clicked");
 	});
+
 	//step one - click events
-	$(".character").on("click",function(){
+	//$(".character").on("click",function(){
+	$(".enemy-area").on("click",".character",function(){
 
 		var characterId = $(this).attr("id");
 		var points = realHousewives[characterId].startlifePoints;
