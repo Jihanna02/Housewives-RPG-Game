@@ -50,7 +50,7 @@ $(document).ready(function(){
 	// defender test, check to see if defender character has been selected before enabling click event
 	 var defendTest = $(".character").hasClass("defender");
 	$(".character").on("click",function(){
-		console.log("im clicked");
+		console.log("im clicked")
 	});
 	//step one - click events
 	$(".character").on("click",function(){
@@ -122,6 +122,9 @@ $(document).ready(function(){
 
 	//step 2 click attack
 	$("#attack").on("click", function(){
+
+		var characterId = $(".enemy").attr("id");
+		var enemyName = realHousewives[characterId].firstName;
 		//generate random attack value for defender
 
 		//generate random attack value for defender for enemy
@@ -137,7 +140,7 @@ $(document).ready(function(){
 			attackLife = attackLife - defendPower;
 
 		//updates health points in DOM
-		$(".attack-stats").text("You attacked "+realHousewives[0].firstName+" for "+defendPower+" damage. "+realHousewives[0].firstName+" attacked you for "+attackPower + " damage.");
+		$(".attack-stats").text("You attacked "+enemyName +" for "+defendPower+" damage. "+ enemyName +" attacked you for "+attackPower + " damage.");
 
 		//updates attack message
 		$(".enemy .points").text(attackLife);
@@ -190,8 +193,7 @@ $(document).ready(function(){
 
 		//step 6 refresh game
 		$("#refresh").on("click", function(){
-			$(".enemy-area").html();
-			$(".battle-area").html();
+			$(".character").remove();
 			$(".character-heading").addClass("hide");
 			$(".current-enemy-heading").addClass("hide");
 			$(".attack-button div").addClass("hide");
@@ -200,5 +202,7 @@ $(document).ready(function(){
 			runLoop();
 
 			console.log(defendTest);
+
+			//REVISIT RESET = when characters are reset to the original locations, they lose their click binding
 		});
 });
