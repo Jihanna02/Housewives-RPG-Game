@@ -36,37 +36,41 @@ $(document).ready(function(){
 	var attackLife = 100;
 
 	// defender test, check to see if defender character has been selected before enabling click event
-	 var defendTest = $(".phaedra, .porsha, .nene, .kenya").hasClass("defender");
-	 	//console.log(defendTest);
-
-	//parses realHousewives object, builds characters in enemy-area div
-	 for (var i=0; i < realHousewives.length; i++) {
-	 	var firstName = realHousewives[i].firstName.toLowerCase();
-	 	var characterDiv = "<div id='"+i+"' class='character"+ " " +firstName+"'><h3 class='name'>"+realHousewives[i].firstName+ "<br />"+realHousewives[i].lastName+"</h3><h4 class='life points'>HP: "+realHousewives[i].startlifePoints+"</h4></div>";
-	 	$(".enemy-area").append(characterDiv);
+	 function runLoop () {
+	 	//parses realHousewives object, builds characters in enemy-area div
+		 for (var i=0; i < realHousewives.length; i++) {
+		 	var firstName = realHousewives[i].firstName.toLowerCase();
+		 	var characterDiv = "<div id='"+i+"' class='character "+firstName+"'><h3 class='name'>"+realHousewives[i].firstName+ "<br />"+realHousewives[i].lastName+"</h3><h4 class='life points'>HP: "+realHousewives[i].startlifePoints+"</h4></div>";
+		 	$(".enemy-area").append(characterDiv);
+		 }
 	 }
+
+	 runLoop();
+
+	 var defendTest = $(".phaedra, .porsha, .nene, .kenya").hasClass("defender");
 
 	//step one - click events
 	$(" .phaedra, .porsha, .nene, .kenya").on("click",function(){
 			
+		console.log("im clicked");
+
 		var characterId = $(this).attr("id");
 		var points = realHousewives[characterId].startlifePoints;
 		var fullName = realHousewives[characterId].firstName + "<br />" + realHousewives[characterId].lastName;
 
-		console.log(points);
-		console.log(fullName);
-
 		var firstName = realHousewives[characterId].firstName.toLowerCase();
 		var characterDiv = "<div id='"+characterId+"' class='character"+ " " +firstName+"'><h3 class='name'>"+fullName+"</h3><h4 class='life points'>HP: "+points+"</h4></div>";
+
+		//hides win and lose message on addition of new enemy
+		$(".attack-button-win-msg").addClass("hide");
 
 		//if no defender character has been selected, select one
 		if (defendTest === false) {
 
 			//remove character from the enemy-area div, append to the defender-area div, re-add the id, add class of "defender"
 			$("#" + characterId).remove();
-			$(".defender-area").append('<div class="character defender"></div>')
+			$(".defender-area").append('<div class="character defender"></div>');
 			$(".defender").attr("id", characterId);
-			;
 			$(".defender").addClass(firstName);
 
 			//add character headings
@@ -119,55 +123,54 @@ $(document).ready(function(){
 	$("#attack").on("click", function(){
 		//generate random attack value for defender
 
-
 		//generate random attack value for defender for enemy
 
 		if( defendPower > attackPower ) {
 
-			defendPower = defendPower + Math.floor(attackPower * .1);
+			//slowly increments defendPower if it's > than attackPower
+			defendPower = defendPower + Math.floor(attackPower / 10);
 
-		};	
-
-			// console.log("defend power: " +defendPower);
-
+		}	
+			//updates health points variables
 			defendLife = defendLife - attackPower;
 			attackLife = attackLife - defendPower;
 
-			console.log("defend life: "+ defendLife)
-			console.log("attack: " + attackLife);
-		
-		
-		
-		//console.log("Defend Life:" + defendLife);
-		$(".defender > .life").text("HP: " + defendLife);
-		//console.log("Attack Life:" + attackLife);
-		$(".enemy > .life").text("HP: " + attackLife);
+		//updates health points in DOM
+		$(".attack-stats").text("You attacked "+realHousewives[0].firstName+" for "+defendPower+" damage. "+realHousewives[0].firstName+" attacked you for "+attackPower + " damage.");
 
-		//console.log("Defend Power:" + defendPower);
-		$(".attack-stats").removeClass("hide");
-		$(".attack-power").text(attackPower);
-		$(".defend-power").text(defendPower);
-
-		//update attack and defend variables in the DOM
+		//updates attack message
+		$(".enemy .points").text(attackLife);
+		$(".defender .points").text(defendLife);
+//***		$(".enemy-name").text()
 
 		 if (attackLife <= 0) {
-		//if enemy's life points < 0 you win, select another enemy
-		$(".attack-button-win-msg").removeClass("hide");
-		
-		//hide attack button, hide current defender
-		$("#attack").addClass("hide");
-		$(".enemy").addClass("hide");
-		$(".attack-button-msg").addClass("hide");
-		$(".enemy").removeClass("enemy");
+			//if enemy's life points < 0 you win, select another enemy
 
+			var enemyTest = $(".enemy-area").has("<div class='character'>");
+			if (enemyTest === false ){
+				$(".attack-stats").addClass("hide");
+				$("#refresh").removeClass("hide");
+				$(".attack-button-win-2-msg").removeClass("hide");
+			} else {
+				$(".attack-button-win-msg").removeClass("hide");
+			}
+
+			//hide attack button, hide current defender
+			$("#attack").addClass("hide");
+			$(".enemy").addClass("hide");
+			$(".attack-button-msg").addClass("hide");
+			$(".enemy").removeClass("enemy");
+
+			//resets click for any of the characters so that it will go to the "enemy" area
+			defendTest = true;
 
 			$("#phaedra, #porsha, #nene, #kenya").on("click", function(){
 				$(".attack-button-win-msg").addClass("hide");
 				$("#attack").removeClass("hide");
 			});
 
-		//reset life points
-		attackLife = 100;
+			//reset life points
+			attackLife = 100;
 
 
 		 } else if (defendLife <= 0) {
@@ -183,13 +186,14 @@ $(document).ready(function(){
 
 		//step 6 refresh game
 		$("#refresh").on("click", function(){
-			$("#attack").addClass("hide");
-			$(".attack-button-lose-msg").addClass("hide");
-			$(".attack-button-win-msg").addClass("hide");
-			$("#refresh").addClass("hide");
-			$(".defender-area").empty();
-			$(".current-enemy-area").empty();
-			$(".character").removeClass("defender");
-			$(".character").removeClass("enemy");
+			$(".character").remove();
+			$(".character-heading").addClass("hide");
+			$(".current-enemy-heading").addClass("hide");
+			$(".attack-button div").addClass("hide");
+			$(".attack-button button").addClass("hide");
+
+			runLoop();
+
+			console.log(defendTest);
 		});
 });
