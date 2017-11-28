@@ -50,6 +50,7 @@ $(document).ready(function(){
 		//if no defender character has been selected, select one
 		if (defendTest === false) {
 
+
 			//remove character from the enemy-area div, append to the defender-area div, re-add the id, add class of "defender"
 			$("#" + characterId).remove();
 			$(".defender-area").append('<div class="character defender"></div>');
