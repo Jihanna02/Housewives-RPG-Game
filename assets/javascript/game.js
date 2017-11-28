@@ -50,7 +50,7 @@ $(document).ready(function(){
 	// defender test, check to see if defender character has been selected before enabling click event
 	 var defendTest = $(".character").hasClass("defender");
 	$(".character").on("click",function(){
-		console.log("im clicked")
+		console.log("im clicked");
 	});
 	//step one - click events
 	$(".character").on("click",function(){
