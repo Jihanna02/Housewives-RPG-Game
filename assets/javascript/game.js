@@ -1,71 +1,90 @@
 $(document).ready(function(){
 
-	var phaedra = {
-		firstName: "Phaedra",
-		lastName: "Parks",
-		startlifePoints: 100,
-		powerPoints: 1
-	};
+	var realHousewives = [
+		phaedra = {
+			firstName: "Phaedra",
+			lastName: "Parks",
+			startlifePoints: 100, 
+			powerPoints: 1
+		},
+		porsha = {
+			firstName: "Porsha", 
+			lastName: "Williams", 
+			startlifePoints: 150,
+			powerPoints: 1
+		},
 
-	var kenya = {
-		firstName: "Kenya",
-		lastName: "Moore",
-		startlifePoints: 180,
-		powerPoints: 1
-	};
+		nene = {
+			firstName: "NeNe",
+			lastName: "Leakes",
+			startlifePoints: "130",
+			powerPoints: 1,
+		},
 
-	var porsha = {
-		firstName: "Porsha",
-		lastName: "Williams",
-		startlifePoints: 150,
-		powerPoints: 1
-	};
+		kenya = {
+			firstName: "Kenya",
+			lastName: "Moore",
+			startlifePoints: 180,
+			powerPoints: 1
+		}
+	];
 
-	var nene = {
-		firstName: "NeNe",
-		lastName: "Leakes",
-		startlifePoints: 100,
-		powerPoints: 1
-	};
 
 	var defendPower = 0;
 	var attackPower = 0;
 	var defendLife = 100;
 	var attackLife = 100;
 
+	
+	function runLoop () {
+	 	//parses realHousewives object, builds characters in enemy-area div
+		 for (var i=0; i < realHousewives.length; i++) {
+		 	var firstName = realHousewives[i].firstName.toLowerCase();
+		 	var characterDiv = "<div id='"+i+"' class='character "+firstName+"'><h3 class='name'>"+realHousewives[i].firstName+ "<br />"+realHousewives[i].lastName+"</h3><h4 class='life points'>HP: "+realHousewives[i].startlifePoints+"</h4></div>";
+		 	$(".enemy-area").append(characterDiv);
+		 }
+	 }
+
+	 runLoop();
+
 	// defender test, check to see if defender character has been selected before enabling click event
-	 var defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
-	 	//console.log(defendTest);
-
+	 var defendTest = $(".character").hasClass("defender");
+	$(".character").on("click",function(){
+		console.log("im clicked");
+	});
 	//step one - click events
-	$(" #phaedra, #porsha, #nene, #kenya").on("click",function(){
-			
-		var characterId = $(this).attr("id");
-		var points = characterId+"[0]";
+	$(".character").on("click",function(){
 
-		console.log(points);
-		// var fullName = characterId[firstName];
-		// var lifePoints = characterId[startLifePoints];
+		var characterId = $(this).attr("id");
+		var points = realHousewives[characterId].startlifePoints;
+		var fullName = realHousewives[characterId].firstName + "<br />" + realHousewives[characterId].lastName;
+
+		var firstName = realHousewives[characterId].firstName.toLowerCase();
+		var characterDiv = "<div id='"+characterId+"' class='character"+ " " +firstName+"'><h3 class='name'>"+fullName+"</h3><h4 class='life points'>HP: "+points+"</h4></div>";
+
+		//hides win and lose message on addition of new enemy
+		$(".attack-button-win-msg").addClass("hide");
 
 		//if no defender character has been selected, select one
 		if (defendTest === false) {
 
 
 			//remove character from the enemy-area div, append to the defender-area div, re-add the id, add class of "defender"
-			$("#" + characterId).remove();
-			$(".defender-area").append('<div class="character defender"></div>');
+			$("#" + characterId).fadeOut(600);
+			$(".defender-area").append('<div class="character defender"></div>').hide().fadeIn(600);
 			$(".defender").attr("id", characterId);
-			$(".character").attr("height", "600px");
+			$(".defender").addClass(firstName);
+
+			//add character headings
 			$(".character-heading").removeClass("hide");
 			$(".current-enemy-heading").removeClass("hide");
 
 			//add score info within character
-			$("#" + characterId).append("<h3 class='name'>defender-name</h3>");
-
-			$("#" + characterId).append("<h4 class='life points'>defender-life</h4>");
+			$(".defender").append("<h3 class='name'>"+ fullName +"</h3>");
+			$(".defender").append("<h4 class='life points'>"+points+"</h4>");
 
 			//update defendTest
-			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
+			defendTest = $(".phaedra, .porsha, .nene, .kenya").hasClass("defender");
 
 			//auto-generates random amount of power of your character
 			defendPower = Math.floor(Math.random() * 50);
@@ -77,13 +96,14 @@ $(document).ready(function(){
 
 			
 			//remove character from the enemy-area div, append to the defender-area div, re-add the id, add class of "defender"
-			$("#" + characterId).remove();
-			$(".current-enemy-area").append('<div class="character enemy"></div>');
+			$("#" + characterId).fadeOut(600);
+			$(".current-enemy-area").append('<div class="character enemy"></div>').hide().fadeIn(600);
 			$(".enemy").attr("id", characterId);
+			$(".enemy").addClass(firstName);
 
 			//add score info within character
-			$("#" + characterId).append("<h3 class='name'>enemy-name</h3>");
-			$("#" + characterId).append("<h4 class='life points'>enemy-life</h4>");
+			$(".enemy").append("<h3 class='name'>"+ fullName +"</h3>");
+			$(".enemy").append("<h4 class='life points'>"+points+"</h4>");
 
 			//update defendTest
 			defendTest = $("#phaedra, #porsha, #nene, #kenya").hasClass("defender");
@@ -103,58 +123,62 @@ $(document).ready(function(){
 
 	//step 2 click attack
 	$("#attack").on("click", function(){
-		//generate random attack value for defender
 
+		var characterId = $(".enemy").attr("id");
+		var enemyName = realHousewives[characterId].firstName;
+		//generate random attack value for defender
 
 		//generate random attack value for defender for enemy
 
 		if( defendPower > attackPower ) {
 
-			defendPower = defendPower + Math.floor((attackPower/10));
+			//slowly increments defendPower if it's > than attackPower
+			defendPower = defendPower + Math.floor(attackPower / 10);
 
+		}	
+			//updates health points variables
 			defendLife = defendLife - attackPower;
-
-			console.log("defend power: " +defendPower);
-			console.log("defend life: "+ defendLife);
-
-		} else {
-
 			attackLife = attackLife - defendPower;
 
-			console.log("attack: " +attackLife);
-		}
-		
-		
-		//console.log("Defend Life:" + defendLife);
-		$(".defender > .life").text("HP: " + defendLife);
-		//console.log("Attack Life:" + attackLife);
-		$(".enemy > .life").text("HP: " + attackLife);
+		//updates health points in DOM
+		$(".attack-stats").text("You attacked "+enemyName +" for "+defendPower+" damage. "+ enemyName +" attacked you for "+attackPower + " damage.");
 
-		//console.log("Defend Power:" + defendPower);
-		$(".attack-stats").removeClass("hide");
-		$(".attack-power").text( attackPower);
-		$(".defend-power").text(defendPower);
-
-		//update attack and defend variables in the DOM
+		//updates attack message
+		$(".enemy .points").text(attackLife);
+		$(".defender .points").text(defendLife);
+//***		$(".enemy-name").text()
 
 		 if (attackLife <= 0) {
-		//if enemy's life points < 0 you win, select another enemy
-		$(".attack-button-win-msg").removeClass("hide");
-		
-		//hide attack button, hide current defender
-		$("#attack").addClass("hide");
-		$(".enemy").addClass("hide");
-		$(".attack-button-msg").addClass("hide");
-		$(".enemy").removeClass("enemy");
+			//if enemy's life points < 0 you win, select another enemy
 
+			var enemyTest = $(".enemy-area").has("div");
 
-			$("#phaedra, #porsha, #nene, #kenya").on("click", function(){
+			console.log(enemyTest);
+
+			if (enemyTest === false ){
+				$(".attack-stats").addClass("hide");
+				$("#refresh").removeClass("hide");
+				$(".attack-button-win-2-msg").removeClass("hide");
+			} else {
+				$(".attack-button-win-msg").removeClass("hide");
+			}
+
+			//hide attack button, hide current defender
+			$("#attack").addClass("hide");
+			$(".enemy").fadeOut(600);
+			$(".attack-button-msg").addClass("hide");
+			$(".enemy").removeClass("enemy");
+
+			//resets click for any of the characters so that it will go to the "enemy" area
+			defendTest = true;
+
+			$(".phaedra, .porsha, .nene, .kenya").on("click", function(){
 				$(".attack-button-win-msg").addClass("hide");
 				$("#attack").removeClass("hide");
 			});
 
-		//reset life points
-		attackLife = 100;
+			//reset life points
+			attackLife = 100;
 
 
 		 } else if (defendLife <= 0) {
@@ -170,13 +194,16 @@ $(document).ready(function(){
 
 		//step 6 refresh game
 		$("#refresh").on("click", function(){
-			$("#attack").addClass("hide");
-			$(".attack-button-lose-msg").addClass("hide");
-			$(".attack-button-win-msg").addClass("hide");
-			$("#refresh").addClass("hide");
-			$(".defender-area").empty();
-			$(".current-enemy-area").empty();
-			$(".character").removeClass("defender");
-			$(".character").removeClass("enemy");
+			$(".character").remove();
+			$(".character-heading").addClass("hide");
+			$(".current-enemy-heading").addClass("hide");
+			$(".attack-button div").addClass("hide");
+			$(".attack-button button").addClass("hide");
+
+			runLoop();
+
+			console.log(defendTest);
+
+			//REVISIT RESET = when characters are reset to the original locations, they lose their click binding
 		});
 });
