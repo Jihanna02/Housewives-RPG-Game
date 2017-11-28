@@ -13,31 +13,10 @@
 		<h2 class="select">Select your character...</h2>
 	</header>
 	<section class="enemy-area">
+
 		<!-- holds all the players as default, holds enemies availible for attack after player has been selected -->
 		<h2 class="enemy-heading hide">Enemies Availible for Attack</h2>
-		<div id="phaedra" class="character">
-			<h3 class="name">Phaedra<br /> Parks</h3>
-			<!-- <img src="assets/images/PP_01.png" /> -->
-			<h4 class="life points">HP: 100</h4>
-		</div>
 
-		<div id="porsha" class="character">
-			<h3 class="name">Porsha<br /> Williams</h3>
-			<!-- <img src="assets/images/PW_01.png" /> -->
-			<h4 class="life points">HP: 150</h4>
-		</div>
-
-		<div id="nene" class="character">
-			<h3 class="name">NeNe<br />Leakes</h3>
-			<!-- <img src="assets/images/NL_01.png" /> -->
-			<h4 class="life points">HP: 100</h4>
-		</div>
-
-		<div id="kenya" class="character">
-			<h3 class="name">Kenya<br />Moore</h3>
-			<!-- <img src="assets/images/KM_01.png" /> -->
-			<h4 class="life points">HP: 180</h4>
-		</div>
 	</section>
 
 	<section class="battle-area">
@@ -46,19 +25,18 @@
 			<h2 class="character-heading hide">Your Character</h2>
 		</div>
 		<div class="attack-button">
-			<div class="attack-stats hide">
-				<div>You attacked <span>#ENEMY</span> for <span class="defend-power">0</span> damage.</div>
-				<div><span>#ENEMY</span> attacked you for <span class="attack-power">0</span> damage.</div>
+			<div class="attack-stats">
 			</div>
 
 			<div class="attack-button-win-msg hide">You win! Select another enemy to continue.</div>
+			<div class="attack-button-win-2-msg hide">You win! Click here to refresh.</div>
 			<div class="attack-button-lose-msg hide">You lose. Click refresh to play again.</div>
 			<button class="hide" id="attack">Attack!</button>
 			<button class="hide" id="refresh">Refresh!</button>
 
 		</div>
 		<div class="current-enemy-area">
-			<h2 class="current-enemy-heading hide">Your (Current) Enemy</h2>
+			<h2 class="current-enemy-heading hide">Your Enemy</h2>
 		</div>
 	</section>
 
