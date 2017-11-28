@@ -116,10 +116,6 @@ h1 {
 	height: 385px;
 }
 
-.character:hover {
-	color: #c8ffff;
-}
-
 .phaedra {
 	background: url("../images/PP_01.png");
 	background-size: contain;

@@ -48,12 +48,12 @@ $(document).ready(function(){
 	 runLoop();
 
 	// defender test, check to see if defender character has been selected before enabling click event
-	 var defendTest = $(".phaedra, .porsha, .nene, .kenya").hasClass("defender");
-
+	 var defendTest = $(".character").hasClass("defender");
+	$(".character").on("click",function(){
+		console.log("im clicked");
+	});
 	//step one - click events
 	$(".character").on("click",function(){
-			
-		console.log("im clicked");
 
 		var characterId = $(this).attr("id");
 		var points = realHousewives[characterId].startlifePoints;
@@ -190,7 +190,8 @@ $(document).ready(function(){
 
 		//step 6 refresh game
 		$("#refresh").on("click", function(){
-			$(".character").remove();
+			$(".enemy-area").html();
+			$(".battle-area").html();
 			$(".character-heading").addClass("hide");
 			$(".current-enemy-heading").addClass("hide");
 			$(".attack-button div").addClass("hide");
