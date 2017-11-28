@@ -35,8 +35,8 @@ $(document).ready(function(){
 	var defendLife = 100;
 	var attackLife = 100;
 
-	// defender test, check to see if defender character has been selected before enabling click event
-	 function runLoop () {
+	
+	function runLoop () {
 	 	//parses realHousewives object, builds characters in enemy-area div
 		 for (var i=0; i < realHousewives.length; i++) {
 		 	var firstName = realHousewives[i].firstName.toLowerCase();
@@ -47,10 +47,11 @@ $(document).ready(function(){
 
 	 runLoop();
 
+	// defender test, check to see if defender character has been selected before enabling click event
 	 var defendTest = $(".phaedra, .porsha, .nene, .kenya").hasClass("defender");
 
 	//step one - click events
-	$(" .phaedra, .porsha, .nene, .kenya").on("click",function(){
+	$(".character").on("click",function(){
 			
 		console.log("im clicked");
 
@@ -68,8 +69,8 @@ $(document).ready(function(){
 		if (defendTest === false) {
 
 			//remove character from the enemy-area div, append to the defender-area div, re-add the id, add class of "defender"
-			$("#" + characterId).remove();
-			$(".defender-area").append('<div class="character defender"></div>');
+			$("#" + characterId).fadeOut(600);
+			$(".defender-area").append('<div class="character defender"></div>').hide().fadeIn(600);
 			$(".defender").attr("id", characterId);
 			$(".defender").addClass(firstName);
 
@@ -94,8 +95,8 @@ $(document).ready(function(){
 
 			
 			//remove character from the enemy-area div, append to the defender-area div, re-add the id, add class of "defender"
-			$("#" + characterId).remove();
-			$(".current-enemy-area").append('<div class="character enemy"></div>');
+			$("#" + characterId).fadeOut(600);
+			$(".current-enemy-area").append('<div class="character enemy"></div>').hide().fadeIn(600);
 			$(".enemy").attr("id", characterId);
 			$(".enemy").addClass(firstName);
 
@@ -146,7 +147,10 @@ $(document).ready(function(){
 		 if (attackLife <= 0) {
 			//if enemy's life points < 0 you win, select another enemy
 
-			var enemyTest = $(".enemy-area").has("<div class='character'>");
+			var enemyTest = $(".enemy-area").has("div");
+
+			console.log(enemyTest);
+
 			if (enemyTest === false ){
 				$(".attack-stats").addClass("hide");
 				$("#refresh").removeClass("hide");
@@ -157,14 +161,14 @@ $(document).ready(function(){
 
 			//hide attack button, hide current defender
 			$("#attack").addClass("hide");
-			$(".enemy").addClass("hide");
+			$(".enemy").fadeOut(600);
 			$(".attack-button-msg").addClass("hide");
 			$(".enemy").removeClass("enemy");
 
 			//resets click for any of the characters so that it will go to the "enemy" area
 			defendTest = true;
 
-			$("#phaedra, #porsha, #nene, #kenya").on("click", function(){
+			$(".phaedra, .porsha, .nene, .kenya").on("click", function(){
 				$(".attack-button-win-msg").addClass("hide");
 				$("#attack").removeClass("hide");
 			});
