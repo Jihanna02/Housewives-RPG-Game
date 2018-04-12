@@ -1,4 +1,4 @@
-# Real HouseWives RPG Game
+# The Real Housewives RPG Game
 
 ## Rules:
 
