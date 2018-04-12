@@ -1,5 +1,4 @@
-# week-4-game
-Housewives RPG Game
+# Housewives RPG Game
 
 ## Rules:
 
